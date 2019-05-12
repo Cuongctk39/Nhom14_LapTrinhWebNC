@@ -1,3 +1,7 @@
 gmail server
 email: emailnhom14@gmail.com
 pass: matkhaulagi
+
+test gui mail
+TestGuiMailNhom14@gmail.com
+matkhaulagi
