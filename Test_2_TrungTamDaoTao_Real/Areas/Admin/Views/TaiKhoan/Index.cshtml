@@ -62,7 +62,13 @@
                 $("#SuaEmail").val(parsedData.Email);
                 $("#SuaHoVaTenLot").val(parsedData.HoTenLot);
                 $("#SuaTen").val(parsedData.Ten);
+                $.each($('#SuaQuyen option'), function () {
+                    $(this).prop('selected', null);
+                    $(this).attr('selected', null);
+                });
+                $("#SuaQuyen option[value=" + parsedData.IdQuyen + "]").prop('selected', 'selected');
                 $("#SuaQuyen option[value=" + parsedData.IdQuyen + "]").attr('selected', 'selected');
+
                 $("#modalChinhSua").modal("show");
             });
         }
@@ -79,10 +85,10 @@
                 data: data
             }).done(function () {
                 $.growl({
-                    location:"tc",
-                    title:"Thông báo",
+                    location: "tc",
+                    title: "Thông báo",
                     message: "Chỉnh sửa thành công",
-                    style:"notice"
+                    style: "notice"
                 });
                 $("#modalChinhSua").modal("hide");
                 $("#table_TaiKhoan").DataTable().ajax.reload();
@@ -110,7 +116,7 @@
                     location: "tc",
                     title: "Thông báo",
                     message: "Thêm mới thành công",
-                    style:"notice"
+                    style: "notice"
                 });
                 $("#modalThemMoi").modal("hide");
                 $("#table_TaiKhoan").DataTable().ajax.reload();

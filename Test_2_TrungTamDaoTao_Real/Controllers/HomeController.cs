@@ -225,10 +225,11 @@ namespace Test_2_TrungTamDaoTao_Real.Controllers
             
             tkB = new TaiKhoanBusiness();
             int id;
+            qB = new QuyenBusiness();
 
             //Lấy tài khoản trùng với email
             List<TaiKhoan> dsTaiKhoan = tkB.TaiKhoanDaTonTai(email);
-
+            string tenQuyen = "";
             //Nếu Email tài khoản chưa tồn tại thì tạo mới tài khoản
             if (dsTaiKhoan.Count != 1)
             {
@@ -238,6 +239,7 @@ namespace Test_2_TrungTamDaoTao_Real.Controllers
                 tk.Ten = firstName;
                 tk.MatKhau = null;
                 tk.IdQuyen = 1;
+                tenQuyen = qB.Quyen_GetNameById(1);
                 id = tkB.TaiKhoan_InsertOutputId(tk);
             }
             else //Nếu Email đã tồn tại
@@ -245,11 +247,13 @@ namespace Test_2_TrungTamDaoTao_Real.Controllers
                 id = dsTaiKhoan[0].IdTaiKhoan;
                 email = dsTaiKhoan[0].Email;
                 firstName = dsTaiKhoan[0].Ten;
+                tenQuyen = qB.Quyen_GetNameById(dsTaiKhoan[0].IdQuyen);
             }
 
             Session["Id"] = id;
             Session["Email"] = email;
             Session["Ten"] = firstName;
+            Session["Quyen"]= tenQuyen;
             return RedirectToAction("Index", "Home");
         }
         #endregion
